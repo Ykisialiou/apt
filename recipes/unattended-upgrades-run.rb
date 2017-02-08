@@ -5,6 +5,12 @@ execute 'unattended-upgrades' do
   command 'sudo unattended-upgrades -d'
 end
 
-execute 'uname' do
-  command 'uname -a'
+ruby_block 'reload_client_config' do
+  block do
+  puts "--- unattended upgrade file START here"
+  file = File.open("/var/log/unattended-upgrades/unattended-upgrades.log", "rb")
+  contents = file.read
+  puts content
+  puts "--- unattended upgrade file END here"
+  end
 end
